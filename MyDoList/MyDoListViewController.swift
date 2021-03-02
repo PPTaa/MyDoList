@@ -9,10 +9,16 @@ import UIKit
 
 class MyDoListViewController: UIViewController {
 
+    // viewModel 만들기
+    let mydoListViewModel  = MydoViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // 키보드 디텍션
+        
+        // 데이터 블러오기
+        mydoListViewModel.loadTasks()
+        
     }
 
 
@@ -21,12 +27,26 @@ class MyDoListViewController: UIViewController {
 extension MyDoListViewController: UICollectionViewDataSource {
     //섹션별 아이템의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return mydoListViewModel.todayMydos.count
+        } else {
+            return mydoListViewModel.upcomingMydos.count
+        }
         return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //커스텀 셀을 deque시켜 가져오기
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyDoListCell", for: indexPath) as? MyDoListCell else { return UICollectionViewCell() }
+        
+        var mydo: Mydo
+        if indexPath.section == 0 {
+            mydo = mydoListViewModel.todayMydos[indexPath.item]
+        } else {
+            mydo = mydoListViewModel.upcomingMydos[indexPath.item]
+        }
+        cell.updateUI(mydo: mydo)
+        
         return cell
     }
     
@@ -34,6 +54,12 @@ extension MyDoListViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MyDoListHeaderView", for: indexPath) as? MyDoListHeaderView else { return UICollectionReusableView() }
+
+            guard let section = MydoViewModel.Section(rawValue: indexPath.section) else {
+                return UICollectionReusableView()
+            }
+
+            header.sectionTitleLabel.text = section.title
             return header
         default:
             return UICollectionReusableView()
@@ -41,7 +67,7 @@ extension MyDoListViewController: UICollectionViewDataSource {
     }
     //섹션의 개수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return mydoListViewModel.numOfSection
     }
 }
 
@@ -61,13 +87,45 @@ class MyDoListCell: UICollectionViewCell {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var strikeThroughView: UIView!
     
-    override class func awakeFromNib() {
+    @IBOutlet weak var strikeThroughWidth: NSLayoutConstraint!
+    
+    var doneButtonTapHandler: ((Bool) -> Void)?
+    var deleteButtonTapHandler: (() -> Void)?
+    
+    override func awakeFromNib() {
         super.awakeFromNib()
+        reset()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        reset()
+    }
+    
+    func updateUI(mydo: Mydo) {
+        // 셀 업데이트
+    }
+    
+    private func showStrikeThrough(_ show: Bool) {
+        if show {
+            strikeThroughWidth.constant = descriptionLabel.bounds.width
+        } else {
+            strikeThroughWidth.constant = 0
+        }
+    }
+    
+    func reset(){
+        // reset 구현
+    }
+    
+    @IBAction func checkButtonTapped(_ sender: Any) {
+        // 체크버튼 탭 처리
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        // 딜리트 버튼 탭 처리
     }
 }
 
