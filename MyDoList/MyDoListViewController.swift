@@ -8,7 +8,14 @@
 import UIKit
 
 class MyDoListViewController: UIViewController {
-
+    
+    @IBOutlet weak var collectionView: UIView!
+    @IBOutlet weak var inputTextfield: UITextField!
+    @IBOutlet weak var inputViewBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var isTodayButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    
     // viewModel 만들기
     let mydoListViewModel  = MydoViewModel()
     
@@ -28,9 +35,16 @@ class MyDoListViewController: UIViewController {
         super.viewDidAppear(animated)
         
         let mydo = Storage.restoreMydo("test.json")
-        print("restore from disk : \(mydo)")
+        print("restore from dist : \(mydo)")
     }
-
+    @IBAction func isTodayButtonTapped(_ sender: Any) {
+        //today 버튼 토글 작업
+        isTodayButton.isSelected = !isTodayButton.isSelected
+    }
+    @IBAction func addTaskButtonTapped(_ sender: Any) {
+        //mydo 에 작업들 추가
+    }
+    
 
 }
 
