@@ -15,6 +15,7 @@
 		7CCDD84D25E934FC00DC778F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CCDD84B25E934FC00DC778F /* LaunchScreen.storyboard */; };
 		7CEBF34925EE7610009B6CA6 /* Mydo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBF34825EE7610009B6CA6 /* Mydo.swift */; };
 		7CEBF34C25EE7C09009B6CA6 /* MydoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBF34B25EE7C09009B6CA6 /* MydoViewModel.swift */; };
+		7CEBF34F25EFC912009B6CA6 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEBF34E25EFC912009B6CA6 /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		7CCDD84E25E934FC00DC778F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CEBF34825EE7610009B6CA6 /* Mydo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mydo.swift; sourceTree = "<group>"; };
 		7CEBF34B25EE7C09009B6CA6 /* MydoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydoViewModel.swift; sourceTree = "<group>"; };
+		7CEBF34E25EFC912009B6CA6 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7CCDD84025E934FA00DC778F /* AppDelegate.swift */,
 				7CCDD84225E934FA00DC778F /* SceneDelegate.swift */,
 				7CCDD84425E934FA00DC778F /* MyDoListViewController.swift */,
+				7CEBF34E25EFC912009B6CA6 /* Storage.swift */,
 				7CCDD84625E934FA00DC778F /* Main.storyboard */,
 				7CCDD84925E934FC00DC778F /* Assets.xcassets */,
 				7CCDD84B25E934FC00DC778F /* LaunchScreen.storyboard */,
@@ -148,6 +151,7 @@
 				7CCDD84125E934FA00DC778F /* AppDelegate.swift in Sources */,
 				7CEBF34925EE7610009B6CA6 /* Mydo.swift in Sources */,
 				7CCDD84325E934FA00DC778F /* SceneDelegate.swift in Sources */,
+				7CEBF34F25EFC912009B6CA6 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

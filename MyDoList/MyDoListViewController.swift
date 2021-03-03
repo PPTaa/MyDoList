@@ -19,6 +19,16 @@ class MyDoListViewController: UIViewController {
         // 데이터 블러오기
         mydoListViewModel.loadTasks()
         
+        let mydo = MydoManager.shared.createMydo(detail: "이게 무슨일이야", isToday: true)
+        Storage.saveMydo(mydo, fileName: "test.json")
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let mydo = Storage.restoreMydo("test.json")
+        print("restore from disk : \(mydo)")
     }
 
 
@@ -106,6 +116,11 @@ class MyDoListCell: UICollectionViewCell {
     
     func updateUI(mydo: Mydo) {
         // 셀 업데이트
+        checkButton.isSelected = mydo.isDone
+        descriptionLabel.text = mydo.detail
+        descriptionLabel.alpha = mydo.isDone ? 0.2 : 1
+        deleteButton.isHidden = mydo.isDone == false
+        showStrikeThrough(mydo.isDone)
     }
     
     private func showStrikeThrough(_ show: Bool) {
@@ -118,14 +133,24 @@ class MyDoListCell: UICollectionViewCell {
     
     func reset(){
         // reset 구현
+        descriptionLabel.alpha = 1
+        deleteButton.isHidden = true
+        showStrikeThrough(false)
     }
     
     @IBAction func checkButtonTapped(_ sender: Any) {
         // 체크버튼 탭 처리
+        checkButton.isSelected = !checkButton.isSelected
+        let isDone = checkButton.isSelected
+        showStrikeThrough(isDone)
+        descriptionLabel.alpha = isDone ? 0.2 : 1
+        deleteButton.isHidden = !isDone
+        doneButtonTapHandler?(isDone)
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
         // 딜리트 버튼 탭 처리
+        deleteButtonTapHandler?()
     }
 }
 

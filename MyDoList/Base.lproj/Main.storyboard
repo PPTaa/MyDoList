@@ -37,9 +37,11 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dv-iZ-Gac">
                                                     <rect key="frame" x="20" y="23" width="35" height="34"/>
-                                                    <state key="normal" image="checkmark.circle.fill" catalog="system">
+                                                    <color key="tintColor" systemColor="systemGreenColor"/>
+                                                    <state key="normal" image="circle" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                                     </state>
+                                                    <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="checkButtonTapped:" destination="nuN-Xf-Qxe" eventType="touchUpInside" id="aDa-UQ-Qvg"/>
                                                     </connections>
@@ -52,6 +54,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJB-Q6-lo5">
                                                     <rect key="frame" x="371" y="28" width="23" height="24"/>
+                                                    <color key="tintColor" systemColor="systemRedColor"/>
                                                     <state key="normal" image="x.circle" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                                                     </state>
@@ -73,6 +76,7 @@
                                                 <constraint firstItem="6Zf-nM-y9c" firstAttribute="centerY" secondItem="FnF-8D-rJf" secondAttribute="centerY" id="CTO-sl-mXd"/>
                                                 <constraint firstAttribute="trailing" secondItem="DJB-Q6-lo5" secondAttribute="trailing" constant="20" id="HYQ-ZT-RIF"/>
                                                 <constraint firstItem="6Zf-nM-y9c" firstAttribute="leading" secondItem="5dv-iZ-Gac" secondAttribute="trailing" constant="20" id="hN4-ZI-fhq"/>
+                                                <constraint firstItem="DJB-Q6-lo5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Zf-nM-y9c" secondAttribute="trailing" constant="20" id="ivD-jJ-yfz"/>
                                                 <constraint firstItem="5dv-iZ-Gac" firstAttribute="leading" secondItem="FnF-8D-rJf" secondAttribute="leading" constant="20" id="jvp-3Q-R2h"/>
                                                 <constraint firstItem="5dv-iZ-Gac" firstAttribute="centerY" secondItem="FnF-8D-rJf" secondAttribute="centerY" id="pgl-6a-ZY2"/>
                                                 <constraint firstItem="DJB-Q6-lo5" firstAttribute="centerY" secondItem="FnF-8D-rJf" secondAttribute="centerY" id="vEC-dn-IqU"/>
@@ -239,6 +243,7 @@
     </scenes>
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="x.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
@@ -246,6 +251,12 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
