@@ -9,7 +9,7 @@ import UIKit
 
 class MyDoListViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var inputTextfield: UITextField!
     @IBOutlet weak var inputViewBottom: NSLayoutConstraint!
     
@@ -21,7 +21,11 @@ class MyDoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 키보드 디텍션
+    // 키보드 디텍션
+        // 키보드 노출 감지
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
+        // 키보드 숨김 감지
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         // 데이터 블러오기
         mydoListViewModel.loadTasks()
@@ -43,9 +47,37 @@ class MyDoListViewController: UIViewController {
     }
     @IBAction func addTaskButtonTapped(_ sender: Any) {
         //mydo 에 작업들 추가
+        // 글자가 있는지 확인
+        guard let detail = inputTextfield.text, detail.isEmpty == false else { return }
+        
+        let mydo = MydoManager.shared.createMydo(detail: detail, isToday: isTodayButton.isSelected)
+        mydoListViewModel.addMydo(mydo)
+        collectionView.reloadData()
+        inputTextfield.text = ""
+        isTodayButton.isSelected = false
+    }
+    
+    // background tap 햇을때 키보드 내려가게 하기
+    @IBAction func tapBackground(_ sender: Any) {
+        inputTextfield.resignFirstResponder()
     }
     
 
+}
+
+extension MyDoListViewController {
+    @objc private func adjustInputView(noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        //키보드 위치에 따른 인풋 뷰 위치변경
+        guard let  keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        if noti.name == UIResponder.keyboardWillShowNotification {
+            let adjustmentHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+            inputViewBottom.constant = adjustmentHeight
+        } else {
+            inputViewBottom.constant = 0
+        }
+        print("\(keyboardFrame)")
+    }
 }
 
 extension MyDoListViewController: UICollectionViewDataSource {
@@ -70,6 +102,19 @@ extension MyDoListViewController: UICollectionViewDataSource {
             mydo = mydoListViewModel.upcomingMydos[indexPath.item]
         }
         cell.updateUI(mydo: mydo)
+        
+        // Mydo done button Handler 작성
+        cell.doneButtonTapHandler = { isDone in
+            mydo.isDone = isDone
+            self.mydoListViewModel.updateMydo(mydo)
+            self.collectionView.reloadData()
+        }
+        // Mydo delete button Handler 작성
+        cell.deleteButtonTapHandler = {
+            self.mydoListViewModel.deleteMydo(mydo)
+            self.collectionView.reloadData()
+        }
+        
         
         return cell
     }

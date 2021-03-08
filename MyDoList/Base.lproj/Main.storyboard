@@ -117,13 +117,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="WBe-Oh-BaY"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c76-iA-gs7">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c76-iA-gs7" customClass="UICollectionView">
                                 <rect key="frame" x="0.0" y="753" width="414" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="내가 해야할 일 적기 메모!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yyU-OH-Lhc">
                                         <rect key="frame" x="10" y="13" width="277" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="277" id="Oys-sJ-mpO"/>
+                                            <constraint firstAttribute="height" constant="34" id="nPI-eE-VCP"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EC0-TZ-BRR">
                                         <rect key="frame" x="297" y="12.5" width="60" height="35"/>
@@ -173,6 +177,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c76-iA-gs7" secondAttribute="trailing" id="3ww-CQ-iBl"/>
                             <constraint firstItem="lXu-IB-cic" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="I4o-eH-6Uo"/>
@@ -182,17 +187,25 @@
                             <constraint firstItem="lXu-IB-cic" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" id="n8o-N5-LaU"/>
                             <constraint firstItem="lXu-IB-cic" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="shw-PM-a4R"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="weg-XX-SjO" appends="YES" id="fJQ-ll-e53"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tasks" image="checkmark.circle.fill" catalog="system" id="OCB-Jv-UU0"/>
                     <connections>
                         <outlet property="addButton" destination="yNi-2q-l35" id="v6t-4x-PoQ"/>
-                        <outlet property="collectionView" destination="c76-iA-gs7" id="TWw-WQ-xnL"/>
+                        <outlet property="collectionView" destination="lXu-IB-cic" id="S1R-MG-RNa"/>
                         <outlet property="inputTextfield" destination="yyU-OH-Lhc" id="KV5-r3-xWr"/>
                         <outlet property="inputViewBottom" destination="RM2-D3-tct" id="XMy-IJ-b0d"/>
                         <outlet property="isTodayButton" destination="EC0-TZ-BRR" id="vBV-kj-sPZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="weg-XX-SjO">
+                    <connections>
+                        <action selector="tapBackground:" destination="BYZ-38-t0r" id="uQ6-CU-f0h"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-213.04347826086959" y="819.64285714285711"/>
         </scene>
