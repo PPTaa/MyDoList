@@ -69,13 +69,14 @@ class MydoManager {
     }
     
     func saveMydo() {
-//        Storage.store(mydos, to: .documents, as: "mydos.json")
+        Storage.saveMydo(mydos, fileName: "saveData.json")
     }
     
     func retrieveMydo() {
 //        mydos = Storage.retrieve("mydos.json", from: .documents, as:[Mydo].self) ?? []
-//
-//        let lastId = mydos.last?.id ?? 0
-//        MydoManager.lastId = lastId
+        guard let mydos = Storage.restoreMydo("saveData.json") else { return }
+
+        let lastId = mydos.last?.id ?? 0
+        MydoManager.lastId = lastId
     }
 }

@@ -89,6 +89,7 @@
                                             <outlet property="deleteButton" destination="DJB-Q6-lo5" id="fCT-EZ-QUB"/>
                                             <outlet property="descriptionLabel" destination="6Zf-nM-y9c" id="Vm6-aN-MUC"/>
                                             <outlet property="strikeThroughView" destination="0Gq-Lp-jK2" id="HIK-gg-zCv"/>
+                                            <outlet property="strikeThroughWidth" destination="evj-rN-7ey" id="Lrm-Rs-9te"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -30,16 +30,16 @@ class MyDoListViewController: UIViewController {
         // 데이터 블러오기
         mydoListViewModel.loadTasks()
         
-        let mydo = MydoManager.shared.createMydo(detail: "이게 무슨일이야", isToday: true)
-        Storage.saveMydo(mydo, fileName: "test.json")
-        
+//        let mydo = MydoManager.shared.createMydo(detail: "이게 무슨일이야", isToday: true)
+//        Storage.saveMydo(mydo, fileName: "test.json")
+//        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let mydo = Storage.restoreMydo("test.json")
-        print("restore from dist : \(mydo)")
+//
+//        let mydo = Storage.restoreMydo("test.json")
+//        print("restore from dist : \(mydo)")
     }
     @IBAction func isTodayButtonTapped(_ sender: Any) {
         //today 버튼 토글 작업

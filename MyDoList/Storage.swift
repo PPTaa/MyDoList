@@ -24,12 +24,46 @@ public class Storage {
             return FileManager.default.urls(for: path, in: .userDomainMask).first!
         }
     }
+    
+//    static func store<T: Encodable>(_ obj: T, to directory: Directory, as fileName:String) {
+//        let url = directory.url.appendingPathComponent(fileName, isDirectory: false)
+//        print("save here ---> \(url)")
+//        let encoder = JSONEncoder()
+//        encoder.outputFormatting = .prettyPrinted
+//
+//        do {
+//            let data = try encoder.encode(obj)
+//            if FileManager.default.fileExists(atPath: url.path) {
+//                try FileManager.default.removeItem(at: url)
+//            }
+//            FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
+//        } catch let error {
+//            print("error Occured in store : \(error.localizedDescription)")
+//        }
+//    }
+
+    static func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T? {
+        print("retrieve here \(fileName)")
+        let url = directory.url.appendingPathComponent(fileName, isDirectory: false)
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+        guard let data = FileManager.default.contents(atPath: url.path) else { return nil }
+
+        let decoder = JSONDecoder()
+
+        do {
+            let model = try decoder.decode(type, from: data)
+            return model
+        } catch let error {
+            print("error Occured in retrieve : \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
 
 extension Storage {
-    static func saveMydo(_ obj:Mydo, fileName: String) {
+    static func saveMydo(_ obj:[Mydo], fileName: String) {
         let url = Directory.documents.url.appendingPathComponent(fileName, isDirectory: false)
-        print(" test save to here : \(url)")
+        print(" saveMydo save to here : \(url)")
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
@@ -48,10 +82,10 @@ extension Storage {
         }
     }
     
-    static func restoreMydo(_ fileName: String) -> Mydo? {
+    static func restoreMydo(_ fileName: String) -> [Mydo]? {
         //파일 이름 입력
         let url = Directory.documents.url.appendingPathComponent(fileName, isDirectory: false)
-        print(" test restore to here : \(url)")
+        print(" restore to here : \(url)")
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
         //파일 이름을 데이터 형태로 읽어옴
         guard let data = FileManager.default.contents(atPath: url.path) else { return nil }
@@ -62,9 +96,10 @@ extension Storage {
         do {
             //스트럭트 형태로 변환해서 가져옴
             let model = try decoder.decode(Mydo.self, from: data)
+            print("read json : \(model)")
             return model
         } catch let error {
-            print("fail to storage : \(error.localizedDescription)")
+            print("fail to storage in restore: \(error.localizedDescription)")
             return nil
         }
     }
