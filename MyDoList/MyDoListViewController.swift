@@ -88,7 +88,6 @@ extension MyDoListViewController: UICollectionViewDataSource {
         } else {
             return mydoListViewModel.upcomingMydos.count
         }
-        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

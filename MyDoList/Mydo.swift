@@ -74,7 +74,7 @@ class MydoManager {
     
     func retrieveMydo() {
 //        mydos = Storage.retrieve("mydos.json", from: .documents, as:[Mydo].self) ?? []
-        guard let mydos = Storage.restoreMydo("saveData.json") else { return }
+        mydos = Storage.restoreMydo("saveData.json")!
 
         let lastId = mydos.last?.id ?? 0
         MydoManager.lastId = lastId

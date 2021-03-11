@@ -42,22 +42,22 @@ public class Storage {
 //        }
 //    }
 
-    static func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T? {
-        print("retrieve here \(fileName)")
-        let url = directory.url.appendingPathComponent(fileName, isDirectory: false)
-        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
-        guard let data = FileManager.default.contents(atPath: url.path) else { return nil }
-
-        let decoder = JSONDecoder()
-
-        do {
-            let model = try decoder.decode(type, from: data)
-            return model
-        } catch let error {
-            print("error Occured in retrieve : \(error.localizedDescription)")
-            return nil
-        }
-    }
+//    static func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T? {
+//        print("retrieve here \(fileName)")
+//        let url = directory.url.appendingPathComponent(fileName, isDirectory: false)
+//        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+//        guard let data = FileManager.default.contents(atPath: url.path) else { return nil }
+//
+//        let decoder = JSONDecoder()
+//
+//        do {
+//            let model = try decoder.decode(type, from: data)
+//            return model
+//        } catch let error {
+//            print("error Occured in retrieve : \(error.localizedDescription)")
+//            return nil
+//        }
+//    }
 }
 
 extension Storage {
@@ -89,13 +89,13 @@ extension Storage {
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
         //파일 이름을 데이터 형태로 읽어옴
         guard let data = FileManager.default.contents(atPath: url.path) else { return nil }
-        
+        print(" restore to here : \(data)")
         //데이터 디코딩
         let decoder = JSONDecoder()
         
         do {
             //스트럭트 형태로 변환해서 가져옴
-            let model = try decoder.decode(Mydo.self, from: data)
+            let model = try decoder.decode([Mydo].self, from: data)
             print("read json : \(model)")
             return model
         } catch let error {
